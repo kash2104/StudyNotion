@@ -1,0 +1,77 @@
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+    firstName:{
+        type:String,
+        required:true,
+        trim:true,
+    },
+
+    lastName:{
+        type:String,
+        required:true,
+        trim:true,
+    }, 
+
+    email:{
+        type:String,
+        required:true,
+        trim:true,
+    },
+
+    password:{
+        type:String,
+        required:true,
+    },
+
+    accountType:{
+        type:String,
+        enum:['Admin', 'Student', 'Instructor'],
+        required:true,
+    },
+
+    active:{
+        type:Boolean,
+        default: true,
+    },
+
+    approved:{
+        type:Boolean,
+        default:true,
+    },
+
+    additionalDetails:{
+        //refers to another model named Profile
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'Profile',
+    }, 
+
+    courses:[{
+        type:mongoose.Schema.Types.ObjectId,
+        // required:true,
+        ref:'Course'
+    }],
+
+    token:{
+        type:String,
+    },
+    
+    resetPasswordExpires:{
+        type:Date,
+    },
+    
+    image:{
+        type:String, //becuase it will be an url
+        required:true,
+    }, 
+
+    courseProgress:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'CourseProgress',
+    }],
+
+    //adding the timestamp for when the new document is created and last modified
+}, {timestamps:true})
+
+module.exports = mongoose.model('User', userSchema);
