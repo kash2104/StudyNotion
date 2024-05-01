@@ -10,6 +10,8 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -61,19 +63,20 @@ function App() {
         <Route 
           path="about" 
           element={
-            <OpenRoute>
-              <About/>
-            </OpenRoute>
+            // <OpenRoute>
+            //   <About/>
+            // </OpenRoute>
+            <About/>
           }/>
 
           <Route
             path="contact"
             element={
-              <OpenRoute>
-                <Contact/>
-              </OpenRoute>
+              <Contact/>
             }
           />
+
+          <Route path="dashboard/my-profile" element={<MyProfile/>}/>
 
       </Routes>
     </div>
