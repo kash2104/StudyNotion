@@ -1,4 +1,5 @@
 import React from 'react'
+import ChangeProfilePicture from './ChangeProfilePicture'
 
 const Settings = () => {
   return (
@@ -7,7 +8,8 @@ const Settings = () => {
             Edit Profile
         </h1>
 
-        
+        {/* profile picture change */}
+        <ChangeProfilePicture/>
     </div>
   )
 }
