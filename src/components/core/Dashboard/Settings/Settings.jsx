@@ -1,6 +1,7 @@
 import React from 'react'
 import ChangeProfilePicture from './ChangeProfilePicture'
 import EditProfile from './EditProfile'
+import UpdatePassword from './UpdatePassword'
 
 const Settings = () => {
   return (
@@ -14,6 +15,9 @@ const Settings = () => {
 
         {/* edite profile */}
         <EditProfile/>
+
+        {/* Password update */}
+        <UpdatePassword/>
     </div>
   )
 }
