@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // AUTH APIS
 export const endpoints = {
@@ -7,20 +7,21 @@ export const endpoints = {
   LOGIN_API: BASE_URL + "/auth/login",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
-}
+};
 
 // PROFILE APIS
 export const profileEndpoints = {
   GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
-}
+  GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+};
 
 // STUDENTS APIS
 export const studentEndpoints = {
   COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
   COURSE_VERIFY_API: BASE_URL + "/payment/verifyPayment",
   SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
-}
+};
 
 // COURSE APIS
 export const courseEndpoints = {
@@ -41,27 +42,27 @@ export const courseEndpoints = {
     BASE_URL + "/course/getFullCourseDetails",
   LECTURE_COMPLETION_API: BASE_URL + "/course/updateCourseProgress",
   CREATE_RATING_API: BASE_URL + "/course/createRating",
-}
+};
 
 // RATINGS AND REVIEWS APIS
 export const ratingsEndpoints = {
   REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
-}
+};
 
 // CATAGORIES APIS
 export const categories = {
   CATEGORIES_API: BASE_URL + "/course/showAllCategories",
-}
+};
 
 // CATALOG PAGE DATA APIS
 export const catalogData = {
   CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
-}
+};
 
 // CONTACT-US APIS
 export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/reach/contact",
-}
+};
 
 // SETTINGS PAGE APIS
 export const settingsEndpoints = {
@@ -69,4 +70,4 @@ export const settingsEndpoints = {
   UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
   CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
   DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
-}
+};
