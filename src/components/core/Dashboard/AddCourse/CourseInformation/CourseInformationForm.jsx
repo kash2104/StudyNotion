@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 
 import { COURSE_STATUS } from "../../../../../utils/constants";
 import ChipInput from "./ChipInput";
+import Upload from "../Upload";
 
 const CourseInformationForm = () => {
   const {
@@ -300,6 +301,14 @@ const CourseInformationForm = () => {
       />
 
       {/* course thumbnail -> upload and thumbnail */}
+      <Upload
+        name="courseImage"
+        label="Course Thumbnail"
+        register={register}
+        setValue={setValue}
+        errors={errors}
+        editData={editCourse ? course?.thumbnail : null}
+      />
 
       {/* benefit of the course */}
       <div className="flex flex-col space-y-2">
