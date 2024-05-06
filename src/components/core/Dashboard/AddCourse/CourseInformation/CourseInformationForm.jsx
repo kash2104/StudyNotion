@@ -18,6 +18,7 @@ import { setCourse, setStep } from "../../../../../slices/courseSlice";
 import toast from "react-hot-toast";
 
 import { COURSE_STATUS } from "../../../../../utils/constants";
+import ChipInput from "./ChipInput";
 
 const CourseInformationForm = () => {
   const {
@@ -138,6 +139,9 @@ const CourseInformationForm = () => {
       } else {
         toast.error("No changes made so far");
       }
+
+      console.log("PRINTING FORMDATA WHILE EDITING THE COURSE....", formData);
+      console.log("PRINTING EDITCOURSE_DETAILS RESULT....", result);
       return;
     }
 
@@ -162,6 +166,8 @@ const CourseInformationForm = () => {
     }
 
     setLoading(false);
+    console.log("PRINTING FORMDATA WHILE CREATING COURSE....", formData);
+    console.log("PRINTING ADDCOURSE_DETAILS RESULT....", result);
   };
 
   return (
@@ -283,6 +289,15 @@ const CourseInformationForm = () => {
       </div>
 
       {/* course tags */}
+      <ChipInput
+        label="Tags"
+        name="courseTags"
+        placeholder="Enter tags and press Enter"
+        register={register}
+        errors={errors}
+        setValue={setValue}
+        getValues={getValues}
+      />
 
       {/* course thumbnail -> upload and thumbnail */}
 
