@@ -134,7 +134,7 @@ const CourseInformationForm = () => {
         setLoading(false);
 
         if (result) {
-          setStep(2);
+          dispatch(setStep(2));
           dispatch(setCourse(result));
         }
       } else {
@@ -162,7 +162,7 @@ const CourseInformationForm = () => {
     setLoading(true);
     const result = await addCourseDetails(formData, token);
     if (result) {
-      setStep(2);
+      dispatch(setStep(2));
       dispatch(setCourse(result));
     }
 
@@ -341,7 +341,7 @@ const CourseInformationForm = () => {
         getValues={getValues}
       />
 
-      <div>
+      <div className="flex justify-end gap-x-2">
         {editCourse && (
           <button
             onClick={() => dispatch(setStep(2))}
