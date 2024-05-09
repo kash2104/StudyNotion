@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createSubSection,
   updateSection,
+  updateSubSection,
 } from "../../../../../services/operations/courseDetailsAPI";
 import { setCourse } from "../../../../../slices/courseSlice";
 import { RxCross1 } from "react-icons/rx";
@@ -81,7 +82,7 @@ const SubSectionModal = ({
 
     setLoading(true);
     //api call
-    const result = await updateSection(formData, token);
+    const result = await updateSubSection(formData, token);
 
     if (result) {
       //update the course structure
