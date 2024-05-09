@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { setEditCourse } from "../../../../../slices/courseSlice";
 
 const RequirementField = ({
   name,
@@ -11,12 +13,14 @@ const RequirementField = ({
   const [requirement, setRequirement] = useState("");
   const [requirementsList, setRequirementsList] = useState([]);
 
+  const { course, editCourse } = useSelector((state) => state.course);
+
   const handleAddRequirement = () => {
-    console.log(requirement);
     if (requirement) {
       //   console.log("list: ", ...requirementsList);
       setRequirementsList([...requirementsList, requirement]);
       setRequirement("");
+      console.log("list: ", requirementsList);
     }
   };
 
@@ -28,6 +32,9 @@ const RequirementField = ({
 
   //will register on the first render
   useEffect(() => {
+    if (editCourse) {
+      setRequirementsList(course?.instructions);
+    }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);
 
@@ -48,7 +55,7 @@ const RequirementField = ({
           type="text"
           id={name}
           value={requirement}
-          onChange={(e) => setRequirement(e.target.value.trim())}
+          onChange={(e) => setRequirement(e.target.value)}
           style={{ boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)" }}
           className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
         />

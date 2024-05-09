@@ -118,6 +118,7 @@ export const editCourseDetails = async (data, token) => {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     });
+    console.log("response");
     console.log("EDIT COURSE API RESPONSE............", response);
     if (!response?.data?.success) {
       throw new Error("Could Not Update Course Details");
@@ -129,6 +130,7 @@ export const editCourseDetails = async (data, token) => {
     toast.error(error.message);
   }
 
+  console.log(result);
   toast.dismiss(toastId);
   return result;
 };

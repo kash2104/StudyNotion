@@ -158,7 +158,7 @@ exports.editCourse = async (req, res) => {
 
     //update the fields that present in req body and not any other fields
     for (const key in updates) {
-      if (updates.hasOwnproperty(key)) {
+      if (updates.hasOwnProperty(key)) {
         if (key === "tag" || key === "instructions") {
           course[key] = JSON.parse(updates[key]);
         } else {

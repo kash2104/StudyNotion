@@ -141,8 +141,8 @@ const CourseInformationForm = () => {
         toast.error("No changes made so far");
       }
 
-      console.log("PRINTING FORMDATA WHILE EDITING THE COURSE....", formData);
-      console.log("PRINTING EDITCOURSE_DETAILS RESULT....", result);
+      // console.log("PRINTING FORMDATA WHILE EDITING THE COURSE....", formData);
+      // console.log("PRINTING EDITCOURSE_DETAILS RESULT....", result);
       return;
     }
 
