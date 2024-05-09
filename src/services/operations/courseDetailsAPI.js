@@ -283,7 +283,7 @@ export const deleteCourse = async (data, token) => {
   const toastId = toast.loading("Loading...");
 
   try {
-    const response = await apiConnector("POST", DELETE_COURSE_API, data, {
+    const response = await apiConnector("DELETE", DELETE_COURSE_API, data, {
       Authorization: `Bearer ${token}`,
     });
 
