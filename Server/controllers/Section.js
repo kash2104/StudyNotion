@@ -116,17 +116,16 @@ exports.deleteSection = async (req, res) => {
     //delete all the subSections from that section
     await SubSection.deleteMany({ _id: { $in: section.subSection } });
 
+    //HW - delete the section from course also -> need to populate again so that it can be seen in the UI and not pull the sectionId from array of the course.courseContent
+    await Course.findByIdAndUpdate(courseId, {
+      $pull: {
+        courseContent: sectionId,
+      },
+    });
+
     //use findbyIdandDelete in section
     await Section.findByIdAndDelete(sectionId);
 
-    //HW - delete the section from course also -> need to populate again so that it can be seen in the UI and not pull the sectionId from array of the course.courseContent
-    // await Course.findByIdAndUpdate(courseId,
-    //     {
-    //     $pull: {
-    //         courseContent: sectionId,
-    //     },
-    //     }
-    // )
     const course = await Course.findById(courseId)
       .populate({
         path: "courseContent",
