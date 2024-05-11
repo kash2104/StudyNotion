@@ -1,6 +1,10 @@
 const { default: mongoose, mongo } = require("mongoose");
 const Category = require("../models/Category");
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 //to create a category
 exports.createCategory = async (req, res) => {
   try {
@@ -39,10 +43,7 @@ exports.showAllCategories = async (req, res) => {
     console.log("INSIDE SHOW ALL CATEGORIES");
     //find function marenge to show all tags
     //koi bhi criteria nhi laga rhe to get the tags but jo bhi tags chahiye usme compulsory name and description hona chahiye
-    const allCategorys = await Category.find(
-      {},
-      { name: true, description: true }
-    );
+    const allCategorys = await Category.find({});
 
     //return success response
     res.status(200).json({
@@ -65,75 +66,78 @@ exports.categoryPageDetails = async (req, res) => {
 
     //uss category id ke corresponding jitne bhi courses hai voh le aao
     const selectedCategory = await Category.findById(categoryId)
-      .populate("course")
+      .populate({
+        path: "course",
+        match: { status: "Published" },
+        populate: "ratingAndReviews",
+      })
       .exec();
 
     //validation
     if (!selectedCategory) {
+      console.log("Category not found!");
       return res.status(404).json({
         success: false,
-        message: "Data not found",
+        message: "Category not found",
+      });
+    }
+
+    // when there are no courses
+    if (selectedCategory.course.length === 0) {
+      console.log("No courses found for the selected category");
+
+      return res.status(404).json({
+        success: false,
+        message: "No courses found for the selected category",
       });
     }
 
     //get courses for different categories
-    const differentCategories = await Category.find({
+    const categoriesExceptSelected = await Category.find({
       _id: { $ne: categoryId },
-    })
-      .populate("course")
+    });
+
+    let differentCategory = await Category.findOne(
+      categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
+        ._id
+    )
+      .populate({
+        path: "course",
+        match: { status: "Published" },
+      })
       .exec();
 
     //get top selling courses - HW
     //select courses, count(student) as total group by courses order by total desc limit 10;
-    try {
-      const topTenCourses = await Category.aggregate([
-        {
-          $unwind: "$course", //makes a new doc for each element of the array course i.e. breaks the array into single elements so that they are easy to access
+    const allCategories = await Category.find()
+      .populate({
+        path: "course",
+        match: { status: "Published" },
+        populate: {
+          path: "instructor",
         },
+      })
+      .exec();
 
-        {
-          $group: {
-            _id: "$course",
-            totalStudentsEnrolled: { $sum: "$course.studentsEnrolled.length" },
-          },
-        },
+    const allCourses = allCategories.flatMap((category) => category.course);
+    const mostSellingCourses = allCourses
+      .sort((a, b) => b.sold - a.sold)
+      .slice(0, 10);
 
-        {
-          $sort: {
-            totalStudentsEnrolled: -1, //to sort the it in desc order
-          },
-        },
-
-        {
-          $limit: 10,
-        },
-      ]);
-
-      if (topTenCourses.length > 0) {
-        return res.status(200).json({
-          success: true,
-          message: "These are the top selling courses",
-          topTenCourses,
-        });
-      }
-
-      //no rating exists
-      return res.status(200).json({
-        success: true,
-        message: "We are analysing the top selling courses",
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: error.message,
-      });
-    }
+    res.status(200).json({
+      success: true,
+      data: {
+        selectedCategory,
+        differentCategory,
+        mostSellingCourses,
+      },
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Internal server error while fetching categoryPageDetails",
+      error: error.message,
     });
   }
 };
