@@ -3,46 +3,47 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body{
-    overflow-x: hidden;
+html,
+body {
+  overflow-x: hidden;
 }
 
-.custom-radial-gradient-1{
-    position: relative;
+.custom-radial-gradient-1 {
+  position: relative;
 }
 
-.custom-radial-gradient-1::before{
-  content: '';
-  position: absolute;
-   width: 372.95px;
-    height: 257.05px;
-    left: calc(50% - 372.95px / 2 - 76.53px);
-    top: calc(50% - 257.05px / 2 - 47.47px);
-    border-radius: 100%;
-    background: linear-gradient(
-        118.19deg,
-        #1fa2ff -3.62%,
-        #12d8fa 50.44%,
-        #a6ffcb 104.51%
-    );
-    opacity: 0.16;
-    filter: blur(34px);
-    transform: matrix(1, 0, -0.03, 1, 0, 0);  
-}
-
-.custom-radial-gradient-2{
-    position: relative;
-}
-
-.custom-radial-gradient-2::before{
-  content: '';
+.custom-radial-gradient-1::before {
+  content: "";
   position: absolute;
   width: 372.95px;
-    height: 257.05px;
-    border-radius: 100%;
-    left: calc(50% - 372.95px / 2 - 76.53px);
-    top: calc(50% - 257.05px / 2 - 47.47px);
-    background: linear-gradient(
+  height: 257.05px;
+  left: calc(50% - 372.95px / 2 - 76.53px);
+  top: calc(50% - 257.05px / 2 - 47.47px);
+  border-radius: 100%;
+  background: linear-gradient(
+    118.19deg,
+    #1fa2ff -3.62%,
+    #12d8fa 50.44%,
+    #a6ffcb 104.51%
+  );
+  opacity: 0.16;
+  filter: blur(34px);
+  transform: matrix(1, 0, -0.03, 1, 0, 0);
+}
+
+.custom-radial-gradient-2 {
+  position: relative;
+}
+
+.custom-radial-gradient-2::before {
+  content: "";
+  position: absolute;
+  width: 372.95px;
+  height: 257.05px;
+  border-radius: 100%;
+  left: calc(50% - 372.95px / 2 - 76.53px);
+  top: calc(50% - 257.05px / 2 - 47.47px);
+  background: linear-gradient(
     123.77deg,
     #8a2be2 -6.46%,
     #ffa500 59.04%,
@@ -53,10 +54,14 @@ html,body{
   transform: matrix(1, 0, -0.03, 1, 0, 0);
 }
 
-.homepage_bg{
-  background:url('../src/assets/Images/bghome.svg')
+.homepage_bg {
+  background: url("../src/assets/Images/bghome.svg");
 }
 
-.label-style{
-  @apply text-[14px] text-richblack-5
+.label-style {
+  @apply text-[14px] text-richblack-5;
+}
+
+.section_heading {
+  @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
 }

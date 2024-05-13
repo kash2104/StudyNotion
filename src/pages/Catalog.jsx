@@ -4,6 +4,11 @@ import { useParams } from "react-router-dom";
 import { apiConnector } from "../services/apiconnector";
 import { categories } from "../services/apis";
 import { getCatalogPageData } from "../services/operations/pageAndComponentData";
+
+import CourseSlider from "../components/core/Catalog/CourseSlider";
+
+import Course_Card from "../components/core/Catalog/Course_Card";
+
 const Catalog = () => {
   const { catalogName } = useParams();
   //   console.log("CatalogName: ", catalogName);
@@ -49,6 +54,7 @@ const Catalog = () => {
       }
     };
 
+    //null ke liye call ja rhi hai isliye error show kar rha hai. that's why the below condition
     if (categoryId) {
       getCategoryDetails();
     }
@@ -131,7 +137,7 @@ const Catalog = () => {
         <div className="section_heading">Frequently Bought</div>
 
         <div className="py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {catalogPageData?.data?.mostSellingCourses
               ?.slice(0, 4)
               .map((course, index) => {
