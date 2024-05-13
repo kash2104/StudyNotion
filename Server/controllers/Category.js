@@ -1,4 +1,3 @@
-const { default: mongoose, mongo } = require("mongoose");
 const Category = require("../models/Category");
 
 function getRandomInt(max) {
@@ -63,6 +62,7 @@ exports.categoryPageDetails = async (req, res) => {
   try {
     //get category id
     const { categoryId } = req.body;
+    console.log("Category ID: ", categoryId);
 
     //uss category id ke corresponding jitne bhi courses hai voh le aao
     const selectedCategory = await Category.findById(categoryId)
@@ -72,6 +72,7 @@ exports.categoryPageDetails = async (req, res) => {
         populate: "ratingAndReviews",
       })
       .exec();
+    console.log("Selected Category: ", selectedCategory);
 
     //validation
     if (!selectedCategory) {

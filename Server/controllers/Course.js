@@ -104,7 +104,7 @@ exports.createCourse = async (req, res) => {
     );
 
     //update the tag schema  --> check this code
-    await Category.findByIdAndUpdate(
+    const categoryDetails2 = await Category.findByIdAndUpdate(
       { _id: category },
       {
         $push: {
@@ -113,6 +113,8 @@ exports.createCourse = async (req, res) => {
       },
       { new: true }
     );
+
+    console.log("Added course into a category..", categoryDetails2);
 
     //return response along with new course
     return res.status(200).json({

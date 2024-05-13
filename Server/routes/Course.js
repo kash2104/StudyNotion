@@ -106,7 +106,7 @@ router.post("/createCategory", auth, isAdmin, createCategory);
 router.get("/showAllCategories", showAllCategories);
 
 //get category page details -> check this*******
-router.get("/getCategoryPageDetails", categoryPageDetails);
+router.post("/getCategoryPageDetails", categoryPageDetails);
 
 /************** RATINGS AND REVIEWS ROUTES ********************/
 
