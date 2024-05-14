@@ -6,6 +6,9 @@ const {
   courseEnrollmentEmail,
 } = require("../mail/templates/courseEnrollmentEmail");
 const { default: mongoose } = require("mongoose");
+const {
+  paymentSuccessEmail,
+} = require("../mail/templates/paymentSuccessEmail");
 
 //writing it for doing multiple payments
 exports.capturePayment = async (req, res) => {
@@ -196,6 +199,45 @@ const enrollStudents = async (courses, userId, res) => {
         message: error.message,
       });
     }
+  }
+};
+
+//controller for sending the mail once the payment is made
+exports.sendPaymentSuccessEmail = async (req, res) => {
+  const { orderId, paymentId, amount } = req.body;
+
+  const userId = req.user.id;
+
+  if (!orderId || !paymentId || !amount || !userId) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide the details for payment controller",
+    });
+  }
+
+  try {
+    //find the student to get the email
+    const enrolledStudent = await User.findById(userId);
+
+    await mailSender(
+      enrolledStudent.email,
+      `Payment Received`,
+      paymentSuccessEmail(
+        `${enrolledStudent.firstName} ${enrolledStudent.lastName}`,
+
+        //becuase we have multiplied by 100 while capturing the payment
+        amount / 100,
+        orderId,
+        paymentId
+      )
+    );
+  } catch (error) {
+    console.log("Error while sending mail after payment..", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Could not send the mail after successfull payment",
+    });
   }
 };
 
