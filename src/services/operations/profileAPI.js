@@ -51,7 +51,7 @@ export async function getUserEnrolledCourses(token) {
       "GET",
       GET_USER_ENROLLED_COURSES_API,
       null,
-      { Authorisation: `Bearer ${token}` }
+      { Authorization: `Bearer ${token}` }
     );
 
     console.log("AFTER CALLING BACKEND API FOR ENROLLED COURSES");
