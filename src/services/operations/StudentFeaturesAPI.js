@@ -92,7 +92,7 @@ export async function buyCourse(
         //send the successfull mail
         sendPaymmentSuccessEmail(
           response,
-          orderResponse.data.data.amount,
+          orderResponse.data.message.amount,
           token
         );
 
@@ -100,6 +100,14 @@ export async function buyCourse(
         verifyPayment({ ...response, courses }, token, navigate, dispatch);
       },
     };
+
+    //opening the dialogue box of razorPay
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+    paymentObject.on("payment.failer", function (response) {
+      toast.error("oops, payment failed");
+      console.log("error while openeing razorPay dialogue box", response.error);
+    });
   } catch (error) {
     console.log("PAYMENT API ERROR...", error);
     toast.error("Could not make the payment");
@@ -131,7 +139,7 @@ async function sendPaymmentSuccessEmail(response, amount, token) {
 
 //verify payment
 async function verifyPayment(bodyData, token, navigate, dispatch) {
-  const toastId = toast.loading("Verifyig Payment...");
+  const toastId = toast.loading("Verifying Payment...");
   dispatch(setPaymentLoading(true));
 
   try {
