@@ -10,6 +10,8 @@ const {
   paymentSuccessEmail,
 } = require("../mail/templates/paymentSuccessEmail");
 
+const crypto = require("crypto");
+
 //writing it for doing multiple payments
 exports.capturePayment = async (req, res) => {
   //on clicking buy now, an order is created
@@ -191,7 +193,7 @@ const enrollStudents = async (courses, userId, res) => {
         )
       );
 
-      console.log("Email sent successfully after enrollment", emailResponse);
+      //   console.log("Email sent successfully after enrollment", emailResponse);
     } catch (error) {
       console.log("Error while enrolling the student", error);
       return res.status(500).json({

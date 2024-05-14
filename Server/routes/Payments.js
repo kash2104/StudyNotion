@@ -20,7 +20,7 @@ const {
 router.post("/capturePayment", auth, isStudent, capturePayment);
 
 //route for verifying the signature
-router.post("/verfiySignature", auth, isStudent, verifyPayment);
+router.post("/verifyPayment", auth, isStudent, verifyPayment);
 
 router.post(
   "/sendPaymentSuccessEmail",
