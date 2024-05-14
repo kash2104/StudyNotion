@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 //getting all the controller related to payment
-const { capturePayment, verifyPayment } = require("../controllers/Payments");
+const {
+  capturePayment,
+  verifyPayment,
+  sendPaymentSuccessEmail,
+} = require("../controllers/Payments");
 
 //getting the middlewares
 const {
@@ -17,5 +21,12 @@ router.post("/capturePayment", auth, isStudent, capturePayment);
 
 //route for verifying the signature
 router.post("/verfiySignature", auth, isStudent, verifyPayment);
+
+router.post(
+  "/sendPaymentSuccessEmail",
+  auth,
+  isStudent,
+  sendPaymentSuccessEmail
+);
 
 module.exports = router;
