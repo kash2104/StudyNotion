@@ -130,7 +130,7 @@ export const Navbar = () => {
             //need to add styling
             user && user?.accountType !== "Instructor" && (
               <Link to={"/dashboard/cart"} className="relative">
-                <AiOutlineShoppingCart />
+                <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
                 {totalItems > 0 && <span>{totalItems}</span>}
               </Link>
             )
