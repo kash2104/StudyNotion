@@ -132,6 +132,8 @@ const CourseDetails = () => {
     );
   }
 
+  //whole path of how the payment works
+
   //BuyNow pe click -> handleBuyCourse -> operations -> StudentFeaturesAPI (buyCourse function) -> backend(capture payment -> initiates order) -> razorPay modal openUp -> success payment -> handler(1. successEmail function -> function using mailSender to send email, 2.verifyPayment function -> Backend(verifyPayment controller called to verify the payment i.e. signature && enroll the students in the course) -> navigate(enrolledCourses page));
   return (
     <>
