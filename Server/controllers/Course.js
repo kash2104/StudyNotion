@@ -246,7 +246,7 @@ exports.getCourseDetails = async (req, res) => {
     const { courseId } = req.body;
 
     //find the course details
-    const courseDetails = await Course.findById({ _id: courseId })
+    const courseDetails = await Course.findOne({ _id: courseId })
       .populate({
         path: "instructor", //instructor is stored as reference so have to use path to populate it.
         populate: {
@@ -259,6 +259,7 @@ exports.getCourseDetails = async (req, res) => {
         path: "courseContent",
         populate: {
           path: "subSection",
+          select: "-videoUrl",
         },
       })
       .exec();
@@ -271,11 +272,24 @@ exports.getCourseDetails = async (req, res) => {
       });
     }
 
+    let totalDurationInSeconds = 0;
+    courseDetails.courseContent.forEach((content) => {
+      content.subSection.forEach((subSection) => {
+        const timeDurationInSeconds = parseInt(subSection.timeDuration);
+        totalDurationInSeconds += timeDurationInSeconds;
+      });
+    });
+
+    const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
+
     //return res
     return res.status(200).json({
       success: true,
       message: "Course details fetched successfully",
-      data: courseDetails,
+      data: {
+        courseDetails,
+        totalDuration,
+      },
     });
   } catch (error) {
     console.log(error);
