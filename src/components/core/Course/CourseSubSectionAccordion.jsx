@@ -1,6 +1,7 @@
 import React from "react";
 import { HiOutlineVideoCamera } from "react-icons/hi";
 
+//here we have to show the subSection name whose sectionAccordion is opened
 const CourseSubSectionAccordion = ({ subSec }) => {
   return (
     <div>
