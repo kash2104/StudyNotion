@@ -6,10 +6,12 @@ const CourseAccordionBar = ({ course, isActive, handleActive }) => {
   const contentEl = useRef(null);
   const [active, setActive] = useState(false);
 
+  //isActive me jo bhhi course._id hai uske section dikhane hai.
   useEffect(() => {
     setActive(isActive?.includes(course._id));
   }, [isActive]);
 
+  //each section is same
   const [sectionHeight, setSectionHeight] = useState(0);
   useEffect(() => {
     setSectionHeight(active ? contentEl.current.scrollHeight : 0);

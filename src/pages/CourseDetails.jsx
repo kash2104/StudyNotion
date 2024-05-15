@@ -24,6 +24,8 @@ const CourseDetails = () => {
   const navigate = useNavigate();
 
   const { courseId } = useParams();
+
+  //kab konsa section dikhana hai. section opened hai toh uss section ke lecture dikhao
   const [isActive, setIsActive] = useState([]);
 
   //need the data of the whole course when the courseId changes
