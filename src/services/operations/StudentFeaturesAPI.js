@@ -110,7 +110,7 @@ export async function buyCourse(
     });
   } catch (error) {
     console.log("PAYMENT API ERROR...", error);
-    toast.error("Could not make the payment");
+    toast.error("You are already enrolled");
   }
 
   toast.dismiss(toastId);
