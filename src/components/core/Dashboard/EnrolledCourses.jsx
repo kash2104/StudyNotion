@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserEnrolledCourses } from "../../../services/operations/profileAPI";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { useNavigate } from "react-router-dom";
 
 const EnrolledCourses = () => {
   const { token } = useSelector((state) => state.auth);
@@ -19,6 +20,8 @@ const EnrolledCourses = () => {
   useEffect(() => {
     getEnrolledCourses();
   }, []);
+
+  const navigate = useNavigate();
   return (
     <>
       <div className="text-3xl text-richblack-50">Enrolled Courses</div>
@@ -47,7 +50,15 @@ const EnrolledCourses = () => {
                 className={`flex items-center border border-richblack-700`}
                 key={index}
               >
-                <div className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3">
+                <div
+                  className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3"
+                  //onclick we have inserted the id of 1st section and 1st subsection
+                  onClick={() => {
+                    navigate(
+                      `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSection?.[0]?._id}`
+                    );
+                  }}
+                >
                   <img
                     src={course.thumbnail}
                     className="h-14 w-14 rounded-lg object-cover"
