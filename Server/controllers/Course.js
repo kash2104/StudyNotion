@@ -17,14 +17,17 @@ exports.createCourse = async (req, res) => {
       courseDescription,
       whatYouWillLearn,
       price,
-      tag,
+      tag: _tag,
       category,
       status,
-      instructions,
+      instructions: _instructions,
     } = req.body;
 
     //get thumbnail
     const thumbnail = req.files.thumbnailImage;
+
+    const tag = JSON.parse(_tag);
+    const instructions = JSON.parse(_instructions);
 
     //validation
     if (
@@ -32,9 +35,10 @@ exports.createCourse = async (req, res) => {
       !courseDescription ||
       !whatYouWillLearn ||
       !price ||
+      !tag.length ||
       !thumbnail ||
       !category ||
-      !tag
+      !instructions.length
     ) {
       return res.status(400).json({
         success: false,
