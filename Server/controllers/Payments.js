@@ -11,6 +11,7 @@ const {
 } = require("../mail/templates/paymentSuccessEmail");
 
 const crypto = require("crypto");
+const CourseProgress = require("../models/CourseProgress");
 
 //writing it for doing multiple payments
 exports.capturePayment = async (req, res) => {
@@ -172,12 +173,23 @@ const enrollStudents = async (courses, userId, res) => {
         });
       }
 
+      //creating the courseProgress of the student
+      const courseProgress = await CourseProgress.create({
+        courseID: courseId,
+        userId: userId,
+        completedVideos: [],
+      });
+
+      //above we have created the courseProgress object, now we have to associate it with the student
+
       //find the student and add the course to their list of enrolld courses
       const enrolledStudent = await User.findByIdAndUpdate(
         userId,
         {
           $push: {
             courses: courseId,
+            //associated the above created courseProgress object with the student
+            courseProgress: courseProgress._id,
           },
         },
         { new: true }
