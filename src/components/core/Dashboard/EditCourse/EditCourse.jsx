@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import RenderSteps from "../AddCourse/RenderSteps";
-import { getFullCourseDetails } from "../../../../services/operations/courseDetailsAPI";
+import { getFullDetailsOfCourse } from "../../../../services/operations/courseDetailsAPI";
 import { setCourse, setEditCourse } from "../../../../slices/courseSlice";
 
 const EditCourse = () => {
@@ -25,7 +25,7 @@ const EditCourse = () => {
     const populateCourseDetails = async () => {
       setLoading(true);
 
-      const result = await getFullCourseDetails(courseId, token);
+      const result = await getFullDetailsOfCourse(courseId, token);
 
       if (result?.courseDetails) {
         dispatch(setEditCourse(true));
