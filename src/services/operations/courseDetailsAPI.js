@@ -328,7 +328,7 @@ export const fetchInstructorCourses = async (token) => {
   return result;
 };
 
-export const getFullCourseDetails = async (courseId, token) => {
+export const getFullDetailsOfCourse = async (courseId, token) => {
   const toastId = toast.loading("Loading...");
   let result = null;
 
