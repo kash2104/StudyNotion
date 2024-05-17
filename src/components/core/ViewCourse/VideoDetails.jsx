@@ -256,6 +256,7 @@ const VideoDetails = () => {
                   //seek = 0 karna hain i.e. video ko vapas se start karna hain matlab current time set kardo = 0
                   if (playerRef?.current) {
                     playerRef.current?.seek(0);
+                    playerRef.current.play();
                     setVideoEnded(false);
                   }
                 }}
