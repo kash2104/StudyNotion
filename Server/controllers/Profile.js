@@ -251,3 +251,38 @@ exports.getEnrolledCourses = async (req, res) => {
     });
   }
 };
+
+//for creating the dashboard of the instructor
+exports.instructorDashboard = async (req, res) => {
+  try {
+    const courseDetails = await Course.find({ instructor: req.user.id });
+
+    const courseData = courseDetails.map((course, index) => {
+      const totalStudentsEnrolled = course.studentsEnrolled.length;
+
+      const totalAmountGenerated = totalStudentsEnrolled * course.price;
+
+      //create an object with all the additional fields
+      const courseDataWithStats = {
+        _id: course._id,
+        courseName: course.courseName,
+        courseDescription: course.courseDescription,
+        totalStudentsEnrolled,
+        totalAmountGenerated,
+      };
+
+      return courseDataWithStats;
+    });
+
+    return res.status(200).json({
+      courses: courseData,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message:
+        "Internal server error while fetching instructor dashboard details",
+    });
+  }
+};
