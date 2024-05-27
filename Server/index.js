@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(
   cors({
     //meri frontend ki request 3000 port se aayegi and hence it is very important
-    origin: "http://localhost:3000",
+    origin: "*",
     credentials: true,
   })
 );
