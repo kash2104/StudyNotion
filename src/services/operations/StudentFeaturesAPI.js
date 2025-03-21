@@ -46,14 +46,14 @@ export async function buyCourse(
   courses,
   userDetails,
   navigate,
-  dispatch
+  dispatch,
 ) {
   const toastId = toast.loading("Loading...");
 
   try {
     //loading the script
     const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
+      "https://checkout.razorpay.com/v1/checkout.js",
     );
 
     if (!res) {
@@ -68,7 +68,7 @@ export async function buyCourse(
       { courses },
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
 
     if (!orderResponse?.data?.success) {
@@ -81,7 +81,7 @@ export async function buyCourse(
       currency: orderResponse.data.message.currency,
       amount: `${orderResponse.data.message.amount}`,
       order_id: orderResponse.data.message.id,
-      name: "StudyNotion",
+      name: "StudyHub",
       description: "Thank You for purchasing the course",
       image: rzpLogo,
       prefill: {
@@ -93,7 +93,7 @@ export async function buyCourse(
         sendPaymmentSuccessEmail(
           response,
           orderResponse.data.message.amount,
-          token
+          token,
         );
 
         //verify the payment
@@ -130,7 +130,7 @@ async function sendPaymmentSuccessEmail(response, amount, token) {
       },
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
   } catch (error) {
     console.log("PAYMENT SUCCESS EMAIL API ERROR...", error);

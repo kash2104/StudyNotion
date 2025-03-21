@@ -160,7 +160,7 @@ const Footer = () => {
           </div>
 
           <div className='text-center select-none'>
-            StudyNotion - By Kavish Parikh
+            StudyHub
           </div>
         </div>
       </div>

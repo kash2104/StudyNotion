@@ -7,7 +7,7 @@ const contactDetails = [
     {
         heading:'Chat on us',
         description: 'Our friendly team is here to help',
-        details:'info@studynotion.com'
+        details:'info@studyhub.com'
     },
     {
         heading:'Visit Us',
