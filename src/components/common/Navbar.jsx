@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, matchPath } from "react-router-dom";
-import logo from "../../assets/Logo/Logo-Full-Light.png";
+import logo from "../../assets/Logo/Logo-Small-Light.png";
 import { NavbarLinks } from "../../data/navbar-links";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -53,7 +53,11 @@ export const Navbar = () => {
     >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         <Link to={"/"}>
-          <img src={logo} alt="logo" width={160} height={42} loading="lazy" />
+          <div className="flex space-x-2 justify-center items-center">
+          <img src={logo} alt="logo" width={30} height={2} loading="lazy" />
+          <p className="text-white font-bold text-xl">StudyHub</p>
+
+          </div>
         </Link>
 
         <nav className="hidden md:block">

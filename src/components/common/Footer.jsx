@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../assets/Logo/Logo-Full-Light.png';
+import Logo from '../../assets/Logo/Logo-Small-Light.png';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { FooterLink2 } from '../../data/footer-links';
@@ -27,7 +27,12 @@ const Footer = () => {
           <div className='flex flex-row flex-wrap lg:w-[50%] justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3'>
             {/* first coloumn */}
             <div className='flex flex-col gap-3 w-[30%] lg:w-[30%] mb-7 lg:pl-0'>
-              <img src={Logo} alt='Logo' className='object-contain'/>
+              <div className="flex space-x-2 justify-start items-center mb-2">
+                <img src={Logo} alt="logo" width={30} height={2} loading="lazy" className='object-contain'/>
+                <p className="text-white font-bold text-xl">StudyHub</p>
+              </div>
+
+              {/* <img src={Logo} alt='Logo' className='object-contain'/> */}
 
               <p className='text-[16px] font-semibold text-richblack-50'>Company</p>
 
